@@ -33,7 +33,6 @@ export class FirebaseAuthStrategy extends PassportStrategy(
     const payload = await this.authorize(jwtToken)
     const user = await this.firebase.getAuth().getUser(payload.uid)
 
-    console.log(user)
     if (user.disabled) {
       throw new ForbiddenException()
     }
