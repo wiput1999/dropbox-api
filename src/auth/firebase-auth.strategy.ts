@@ -29,14 +29,11 @@ export class FirebaseAuthStrategy extends PassportStrategy(
     super()
   }
 
-  /**
-   * @UseGuards(FirebaseAuthGuard) から @AuthenticatedUser() に渡す
-   *
-   * @see https://github.com/mikenicholson/passport-jwt/blob/master/lib/strategy.js#L87-L90
-   */
   async validate(jwtToken: string): Promise<auth.UserRecord> {
     const payload = await this.authorize(jwtToken)
     const user = await this.firebase.getAuth().getUser(payload.uid)
+
+    console.log(user)
     if (user.disabled) {
       throw new ForbiddenException()
     }

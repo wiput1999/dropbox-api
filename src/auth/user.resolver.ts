@@ -10,6 +10,6 @@ export class UserResolver {
   @Query(() => User)
   @UseGuards(GqlFirebaseAuthGuard)
   async user(@CurrentUser() user: FirebaseAuthDecodedUser) {
-    return { id: user.uid }
+    return { id: user.uid, email: user.email }
   }
 }
