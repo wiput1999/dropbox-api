@@ -23,6 +23,7 @@
   "dependencies": {
     "@nestjs/apollo": "^10.0.19",
     "@nestjs/common": "^9.0.0",
+    "@nestjs/config": "^2.2.0",
     "@nestjs/core": "^9.0.0",
     "@nestjs/graphql": "^10.0.21",
     "@nestjs/passport": "^9.0.0",
@@ -32,6 +33,7 @@
     "@types/passport-http-bearer": "^1.0.37",
     "apollo-server-express": "^3.10.0",
     "apollo-server-fastify": "^3.10.0",
+    "fastify": "^4.3.0",
     "firebase-admin": "^11.0.1",
     "graphql": "^16.5.0",
     "passport": "^0.6.0",
