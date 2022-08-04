@@ -11,6 +11,7 @@ specifiers:
   '@nestjs/platform-fastify': ^9.0.7
   '@nestjs/schematics': ^9.0.0
   '@nestjs/testing': ^9.0.0
+  '@prisma/client': ^4.1.1
   '@types/express': ^4.17.13
   '@types/jest': 28.1.4
   '@types/node': ^16.0.0
@@ -31,6 +32,7 @@ specifiers:
   passport-http-bearer: ^1.0.1
   passport-jwt: ^4.0.0
   prettier: ^2.3.2
+  prisma: ^4.1.1
   reflect-metadata: ^0.1.13
   rimraf: ^3.0.2
   rxjs: ^7.2.0
@@ -50,6 +52,7 @@ dependencies:
   '@nestjs/passport': 9.0.0_2fq5yfrcl6cznjgkyjyniahzdi
   '@nestjs/platform-express': 9.0.7_xxlaro4n3ygapuy65e43lboh2y
   '@nestjs/platform-fastify': 9.0.7_xxlaro4n3ygapuy65e43lboh2y
+  '@prisma/client': 4.1.1_prisma@4.1.1
   '@types/passport-http-bearer': 1.0.37
   apollo-server-express: 3.10.0_graphql@16.5.0
   apollo-server-fastify: 3.10.0_graphql@16.5.0
@@ -59,6 +62,7 @@ dependencies:
   passport-custom: 1.1.1
   passport-http-bearer: 1.0.1
   passport-jwt: 4.0.0
+  prisma: 4.1.1
   reflect-metadata: 0.1.13
   rimraf: 3.0.2
   rxjs: 7.5.6
@@ -1545,6 +1549,29 @@ packages:
   /@panva/asn1.js/1.0.0:
     resolution: {integrity: sha512-UdkG3mLEqXgnlKsWanWcgb6dOjUzJ+XC5f+aWw30qrtjxeNUSfKX1cd5FBzOaXQumoe9nIqeZUvrRJS03HCCtw==}
     engines: {node: '>=10.13.0'}
+    dev: false
+
+  /@prisma/client/4.1.1_prisma@4.1.1:
+    resolution: {integrity: sha512-2pXuIUYxHv5H9o6QTa1VIsl4yMgsAjKQOitlo8WVTB+vo73rmMJITBPavdGUZSWUc7adMkFzEV3y5rVTUQr77Q==}
+    engines: {node: '>=14.17'}
+    requiresBuild: true
+    peerDependencies:
+      prisma: '*'
+    peerDependenciesMeta:
+      prisma:
+        optional: true
+    dependencies:
+      '@prisma/engines-version': 4.1.0-48.8d8414deb360336e4698a65aa45a1fbaf1ce13d8
+      prisma: 4.1.1
+    dev: false
+
+  /@prisma/engines-version/4.1.0-48.8d8414deb360336e4698a65aa45a1fbaf1ce13d8:
+    resolution: {integrity: sha512-cRRJwpHFGFJZvtHbY3GZjMffNBEjjZk68ztn+S2hDgPCGB4H66IK26roK94GJxBodSehwRJ0wGyebC2GoIH1JQ==}
+    dev: false
+
+  /@prisma/engines/4.1.1:
+    resolution: {integrity: sha512-DCw8L/SS0IXqmj5IW/fMxOXiifnsfjBzDfRhf0j3NFWqvMCh9OtfjmXQZxVgI2mwvJLc/5jzXhkiWT39qS09dA==}
+    requiresBuild: true
     dev: false
 
   /@protobufjs/aspromise/1.1.2:
@@ -5332,6 +5359,15 @@ packages:
       ansi-styles: 5.2.0
       react-is: 18.2.0
     dev: true
+
+  /prisma/4.1.1:
+    resolution: {integrity: sha512-yw50J8If2dKP4wYIi695zthsCASQFHiogGvUHHWd3falx/rpsD6Sb1LMLRV9nO3iGG3lozxNJ2PSINxK7xwdpg==}
+    engines: {node: '>=14.17'}
+    hasBin: true
+    requiresBuild: true
+    dependencies:
+      '@prisma/engines': 4.1.1
+    dev: false
 
   /process-nextick-args/2.0.1:
     resolution: {integrity: sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==}

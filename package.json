@@ -28,6 +28,7 @@
     "@nestjs/passport": "^9.0.0",
     "@nestjs/platform-express": "^9.0.7",
     "@nestjs/platform-fastify": "^9.0.7",
+    "@prisma/client": "^4.1.1",
     "@types/passport-http-bearer": "^1.0.37",
     "apollo-server-express": "^3.10.0",
     "apollo-server-fastify": "^3.10.0",
@@ -37,6 +38,7 @@
     "passport-custom": "^1.1.1",
     "passport-http-bearer": "^1.0.1",
     "passport-jwt": "^4.0.0",
+    "prisma": "^4.1.1",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0"

@@ -37,3 +37,4 @@ lerna-debug.log*
 schema.gql
 
 serviceAccount.json
+.env
