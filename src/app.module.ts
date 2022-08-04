@@ -1,3 +1,4 @@
+import { join } from 'path'
 import { Module } from '@nestjs/common'
 import { GraphQLModule } from '@nestjs/graphql'
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo'
@@ -5,7 +6,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo'
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
 import { AuthModule } from './auth/auth.module'
-import { join } from 'path'
+import { PrismaService } from './prisma.service'
 import { FirebaseModule } from './firebase/firebase.module'
 
 @Module({
@@ -19,6 +20,6 @@ import { FirebaseModule } from './firebase/firebase.module'
     AuthModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, PrismaService],
 })
 export class AppModule {}
