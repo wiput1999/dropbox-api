@@ -28,6 +28,7 @@
     "@nestjs/passport": "^9.0.0",
     "@nestjs/platform-express": "^9.0.7",
     "@nestjs/platform-fastify": "^9.0.7",
+    "@types/passport-http-bearer": "^1.0.37",
     "apollo-server-express": "^3.10.0",
     "apollo-server-fastify": "^3.10.0",
     "firebase-admin": "^11.0.1",

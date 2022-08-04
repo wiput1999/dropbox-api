@@ -34,7 +34,7 @@ export class FirebaseAuthStrategy extends PassportStrategy(
     const user = await this.firebase.getAuth().getUser(payload.uid)
 
     if (user.disabled) {
-      throw new ForbiddenException()
+      throw new ForbiddenException('User disabled')
     }
 
     return user
@@ -49,8 +49,10 @@ export class FirebaseAuthStrategy extends PassportStrategy(
       const e = err as FirebaseError
       if (e.code === 'auth/id-token-expired') {
         this.logger.warn('auth/id-token-expired')
+        throw new UnauthorizedException('Token Expired')
       } else if (e.code === 'auth/id-token-revoked') {
         this.logger.warn('auth/id-token-revoked')
+        throw new UnauthorizedException('Token Revoked')
       }
 
       throw new UnauthorizedException()
