@@ -9,6 +9,8 @@ import { auth, FirebaseError } from 'firebase-admin'
 import * as firebaseAdmin from 'firebase-admin'
 import { Strategy } from 'passport-http-bearer'
 import { FirebaseService } from '@/firebase/firebase.service'
+import { UserService } from './user.service'
+import { User } from '@prisma/client'
 
 type DecodedIdToken = firebaseAdmin.auth.DecodedIdToken
 export type FirebaseAuthDecodedUser = Readonly<
@@ -25,16 +27,25 @@ export class FirebaseAuthStrategy extends PassportStrategy(
   private readonly checkRevoked = false
   private readonly logger = new Logger(FirebaseAuthStrategy.name)
 
-  constructor(private readonly firebase: FirebaseService) {
+  constructor(
+    private readonly firebase: FirebaseService,
+    private readonly userService: UserService,
+  ) {
     super()
   }
 
-  async validate(jwtToken: string): Promise<auth.UserRecord> {
+  async validate(jwtToken: string): Promise<User> {
     const payload = await this.authorize(jwtToken)
-    const user = await this.firebase.getAuth().getUser(payload.uid)
+    const firebaseUser = await this.firebase.getAuth().getUser(payload.uid)
 
-    if (user.disabled) {
+    if (firebaseUser.disabled) {
       throw new ForbiddenException('User disabled')
+    }
+
+    const user = await this.userService.findByFirebaseUid(firebaseUser.uid)
+
+    if (!user) {
+      return this.userService.createFromFirebase(firebaseUser)
     }
 
     return user

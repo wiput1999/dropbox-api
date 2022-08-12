@@ -1,11 +1,82 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = env("DB_URL")
+}
+
+enum UserStatus {
+  INACTIVE
+  ACTIVE
+  BANNED
+}
+
+model User {
+  id          String      @id @default(uuid())
+  firebaseUid String      @unique
+  email       String
+  firstName   String?
+  lastName    String?
+  profile     String?
+  verified    Boolean     @default(false)
+  status      UserStatus  @default(ACTIVE)
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  eventUser   EventUser[]
+}
+
+model Event {
+  id        String   @id @default(uuid())
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  eventUser EventUser[]
+  eventRole EventRole[]
+}
+
+model EventUser {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  eventId   String
+  event     Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([eventId, userId])
+}
+
+model EventRole {
+  id        String   @id @default(uuid())
+  name      String
+  eventId   String
+  event     Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  updatedAt DateTime @default(now()) @updatedAt
+  createdAt DateTime @default(now())
+
+  eventRolePermission EventRolePermission[]
+
+  @@index([eventId])
+}
+
+model EventRolePermission {
+  id           String     @id @default(uuid())
+  eventRoleId  String
+  eventRole    EventRole  @relation(fields: [eventRoleId], references: [id], onDelete: Cascade)
+  permissionId String
+  permission   Permission @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+}
+
+model Permission {
+  id                  String                @id @default(uuid())
+  permission          String                @unique
+  updatedAt           DateTime              @default(now()) @updatedAt
+  createdAt           DateTime              @default(now())
+  eventRolePermission EventRolePermission[]
+
+  @@index([permission])
 }
