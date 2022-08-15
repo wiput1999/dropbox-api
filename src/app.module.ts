@@ -11,10 +11,15 @@ import { PrismaService } from './db/prisma.service'
 import { FirebaseModule } from './firebase/firebase.module'
 import { ContextModule } from './context/context.module'
 import { ContextService } from './context/context.service'
+import firebaseConfig from './config/firebase.config'
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true, cache: true }),
+    ConfigModule.forRoot({
+      isGlobal: true,
+      cache: true,
+      load: [firebaseConfig],
+    }),
     GraphQLModule.forRootAsync<ApolloDriverConfig>({
       driver: ApolloDriver,
       imports: [ConfigModule, ContextModule],
