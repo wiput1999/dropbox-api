@@ -13,18 +13,34 @@ enum UserStatus {
   BANNED
 }
 
+enum UserRole {
+  ADMIN
+  USER
+}
+
 model User {
   id          String      @id @default(uuid())
   firebaseUid String      @unique
   email       String
-  firstName   String?
-  lastName    String?
-  profile     String?
-  verified    Boolean     @default(false)
+  role        UserRole    @default(USER)
   status      UserStatus  @default(ACTIVE)
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
   eventUser   EventUser[]
+  profileId   String?     @unique
+  profile     Profile?    @relation(fields: [profileId], references: [id])
+}
+
+model Profile {
+  id          String   @id @default(uuid())
+  firstName   String?
+  lastName    String?
+  displayName String?
+  picture     String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user User?
 }
 
 model Event {
@@ -34,49 +50,26 @@ model Event {
   updatedAt DateTime @updatedAt
 
   eventUser EventUser[]
-  eventRole EventRole[]
+}
+
+enum EventRole {
+  ADMIN
+  STAFF
+  PARTICIPANT
 }
 
 model EventUser {
-  id        String   @id @default(uuid())
-  userId    String
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  eventId   String
-  event     Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
-  isActive  Boolean  @default(true)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id          String    @id @default(uuid())
+  userId      String
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  eventId     String
+  event       Event     @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  displayName String?
+  tagLine     String?
+  roles       EventRole @default(PARTICIPANT)
+  isActive    Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
 
   @@index([eventId, userId])
-}
-
-model EventRole {
-  id        String   @id @default(uuid())
-  name      String
-  eventId   String
-  event     Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
-  updatedAt DateTime @default(now()) @updatedAt
-  createdAt DateTime @default(now())
-
-  eventRolePermission EventRolePermission[]
-
-  @@index([eventId])
-}
-
-model EventRolePermission {
-  id           String     @id @default(uuid())
-  eventRoleId  String
-  eventRole    EventRole  @relation(fields: [eventRoleId], references: [id], onDelete: Cascade)
-  permissionId String
-  permission   Permission @relation(fields: [permissionId], references: [id], onDelete: Cascade)
-}
-
-model Permission {
-  id                  String                @id @default(uuid())
-  permission          String                @unique
-  updatedAt           DateTime              @default(now()) @updatedAt
-  createdAt           DateTime              @default(now())
-  eventRolePermission EventRolePermission[]
-
-  @@index([permission])
 }

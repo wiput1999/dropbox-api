@@ -6,9 +6,9 @@ import { User } from './models/user.model'
 import { PrismaTypes } from '@/db'
 
 @Resolver(() => User)
+@UseGuards(GqlFirebaseAuthGuard)
 export class UserResolver {
   @Query(() => User)
-  @UseGuards(GqlFirebaseAuthGuard)
   async user(@CurrentUser() user: PrismaTypes.User) {
     return user
   }
