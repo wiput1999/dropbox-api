@@ -12,6 +12,9 @@ export class Profile {
   lastName?: string
 
   @Field(() => String, { nullable: true })
+  phone?: string
+
+  @Field(() => String, { nullable: true })
   facebook?: string
 
   @Field(() => String, { nullable: true })
@@ -35,12 +38,15 @@ export class CreateProfileInput {
   @Field()
   facebook: string
 
-  @Field()
-  instagram: string
+  @Field({ nullable: true })
+  phone?: string
 
-  @Field()
-  twitter: string
+  @Field({ nullable: true })
+  instagram?: string
 
-  @Field()
-  line: string
+  @Field({ nullable: true })
+  twitter?: string
+
+  @Field({ nullable: true })
+  line?: string
 }

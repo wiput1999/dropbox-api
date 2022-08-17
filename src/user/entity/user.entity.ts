@@ -1,4 +1,5 @@
 import { Field, InputType, ObjectType, registerEnumType } from '@nestjs/graphql'
+import { Profile } from './profile.entity'
 
 export enum UserRole {
   ADMIN = 'ADMIN',
@@ -19,4 +20,7 @@ export class User {
 
   @Field(() => UserRole)
   role: UserRole
+
+  @Field(() => Profile, { nullable: true })
+  profile?: Profile
 }
