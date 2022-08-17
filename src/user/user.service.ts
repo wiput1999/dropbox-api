@@ -1,13 +1,12 @@
-import { PrismaService } from '@/db/prisma.service'
 import { Injectable } from '@nestjs/common'
-import { User } from '@prisma/client'
-import { FirebaseAuthDecodedUser } from './firebase-auth.strategy'
+import { FirebaseAuthDecodedUser } from '@/auth/firebase-auth.strategy'
+import { PrismaService, PrismaTypes } from '@/db'
 
 @Injectable()
 export class UserService {
   constructor(private readonly prisma: PrismaService) {}
 
-  findByFirebaseUid(firebaseUid: string): Promise<User | null> {
+  findByFirebaseUid(firebaseUid: string): Promise<PrismaTypes.User | null> {
     return this.prisma.user.findUnique({
       where: {
         firebaseUid,
@@ -15,7 +14,9 @@ export class UserService {
     })
   }
 
-  createFromFirebase(firebaseUser: FirebaseAuthDecodedUser): Promise<User> {
+  createFromFirebase(
+    firebaseUser: FirebaseAuthDecodedUser,
+  ): Promise<PrismaTypes.User> {
     return this.prisma.user.create({
       data: {
         firebaseUid: firebaseUser.uid,

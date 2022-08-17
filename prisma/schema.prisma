@@ -37,6 +37,10 @@ model Profile {
   lastName    String?
   displayName String?
   picture     String?
+  facebook    String?
+  instagram   String?
+  twitter     String?
+  phone       String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
@@ -66,6 +70,7 @@ model EventUser {
   event       Event     @relation(fields: [eventId], references: [id], onDelete: Cascade)
   displayName String?
   tagLine     String?
+  social      Json      @default("{}")
   roles       EventRole @default(PARTICIPANT)
   isActive    Boolean   @default(true)
   createdAt   DateTime  @default(now())

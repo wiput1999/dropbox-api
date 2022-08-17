@@ -5,11 +5,11 @@ import {
   UnauthorizedException,
 } from '@nestjs/common'
 import { PassportStrategy } from '@nestjs/passport'
-import { auth, FirebaseError } from 'firebase-admin'
+import { FirebaseError } from 'firebase-admin'
 import * as firebaseAdmin from 'firebase-admin'
 import { Strategy } from 'passport-http-bearer'
 import { FirebaseService } from '@/firebase/firebase.service'
-import { UserService } from './user.service'
+import { UserService } from '@/user/user.service'
 import { User } from '@prisma/client'
 
 type DecodedIdToken = firebaseAdmin.auth.DecodedIdToken

@@ -17,21 +17,6 @@ export class User {
   @Field(() => String)
   email: string
 
-  @Field(() => String, { nullable: true })
-  firstName?: string
-
-  @Field(() => String, { nullable: true })
-  lastName?: string
-
   @Field(() => UserRole)
   role: UserRole
-}
-
-@InputType()
-export class VerifyUserInput {
-  @Field()
-  firstName: string
-
-  @Field()
-  lastName: string
 }

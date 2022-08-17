@@ -7,6 +7,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config'
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
 import { AuthModule } from './auth/auth.module'
+import { UserModule } from './user/user.module'
 import { PrismaService } from './db/prisma.service'
 import { FirebaseModule } from './firebase/firebase.module'
 import { ContextModule } from './context/context.module'
@@ -43,6 +44,7 @@ import firebaseConfig from './config/firebase.config'
     FirebaseModule,
     AuthModule,
     ContextModule,
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService, PrismaService],

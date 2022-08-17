@@ -22,4 +22,8 @@ export class FirebaseService {
   getAuth = (): firebase.auth.Auth => {
     return this.firebaseApp.auth()
   }
+
+  getStorage = (): firebase.storage.Storage => {
+    return this.firebaseApp.storage()
+  }
 }

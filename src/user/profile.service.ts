@@ -1,5 +1,5 @@
 import { ForbiddenException, Injectable } from '@nestjs/common'
-import { CreateProfileInput } from '@/auth/models/profile.model'
+import { CreateProfileInput } from './entity/profile.entity'
 import { PrismaService } from '@/db/prisma.service'
 
 @Injectable()

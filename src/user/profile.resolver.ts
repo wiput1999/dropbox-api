@@ -1,8 +1,8 @@
 import { Args, Mutation, Resolver } from '@nestjs/graphql'
 import { UseGuards } from '@nestjs/common'
 import { CurrentUser } from '@/decorators/current-user.decorator'
-import { ProfileService } from '@/auth/profile.service'
-import { CreateProfileInput, Profile } from '@/auth/models/profile.model'
+import { ProfileService } from './profile.service'
+import { CreateProfileInput, Profile } from './entity/profile.entity'
 import { GqlFirebaseAuthGuard } from '@/guards/gql-firebase-auth.guard'
 
 @Resolver(() => Profile)
