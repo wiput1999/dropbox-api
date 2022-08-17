@@ -12,6 +12,7 @@ import { PrismaService } from './db/prisma.service'
 import { FirebaseModule } from './firebase/firebase.module'
 import { ContextModule } from './context/context.module'
 import { ContextService } from './context/context.service'
+import { EventModule } from './event/event.module'
 import firebaseConfig from './config/firebase.config'
 
 @Module({
@@ -45,6 +46,7 @@ import firebaseConfig from './config/firebase.config'
     AuthModule,
     ContextModule,
     UserModule,
+    EventModule,
   ],
   controllers: [AppController],
   providers: [AppService, PrismaService],
